@@ -2,23 +2,41 @@
  * @Description: 
  * @Author: wanglingkai
  * @Date: 2023-12-30 21:46:49
- * @LastEditors: wanglingkai
- * @LastEditTime: 2023-12-30 22:20:52
+ * @LastEditors: linkayy
+ * @LastEditTime: 2024-03-15 21:51:57
 -->
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import SetupAttr from './components/setupComp/setupAttr.vue'
+import SetupFn from './components/setupComp/setupFn.vue'
 import { ref } from 'vue'
-const test = ref('test')
+import { useCounterStore } from '@/stores/counter'
+
+const setupAttr = ref(null)
+const setupFn = ref(null)
+console.log('setupAttr实例--->', setupAttr)
+console.log('setupFn--->', setupFn)
+
+// pinia
+const count = useCounterStore()
+console.log('count--->', count.count)
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      <p>{{ test }}</p>
+      <SetupAttr ref="setupAttr" />
+      <SetupFn ref="setupFn" />
+      <!-- <el-button>我是 ElButton</el-button> -->
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -67,7 +85,7 @@ nav a:first-of-type {
 
 @media (min-width: 1024px) {
   header {
-    display: flex;
+    /* display: flex; */
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
@@ -77,7 +95,7 @@ nav a:first-of-type {
   }
 
   header .wrapper {
-    display: flex;
+    /* display: flex; */
     place-items: flex-start;
     flex-wrap: wrap;
   }
@@ -90,5 +108,8 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+.show-box {
+  display: flex;
 }
 </style>
